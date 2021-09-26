@@ -7,11 +7,9 @@ $conn = mysqli_connect($_SERVER['MYSQLHOST'].':'.$_SERVER['MYSQLPORT'],$_SERVER[
 $site = "https://url.vhost.my.id";
 //Script Rest Api Url Shortener Database
     if ($_GET['key'] === 'fw'){
-        $datestring = '%d %m %Y - %h:%i %a %s';
 	$time = time();
-	$date = mdate($datestring, $time);
         $a = substr(base64_encode($time),0,5);
-        $longUrl = $_POST['longUrl'];
+        $longUrl = @$_POST['longUrl'];
         $shortUrl = $site.'/'.$a;
         if(!empty($longUrl)){
             $sql = "INSERT INTO url (longUrl, shortUrl, code, view) VALUES('".$longUrl."','".$shortUrl."','".$a."','0')";
