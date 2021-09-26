@@ -1,6 +1,7 @@
 <?php
 date_default_timezone_set("Asia/Jakarta");
-
+error_reporting(-1);
+ini_set('display_errors', 1);
 //MySQL Connection Database
 $conn = mysqli_connect($_SERVER['MYSQLHOST'].':'.$_SERVER['MYSQLPORT'],$_SERVER['MYSQLUSER'],$_SERVER['MYSQLPASSWORD'],$_SERVER['MYSQLDATABASE']) or die(mysqli_error());
 
