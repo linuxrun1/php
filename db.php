@@ -19,7 +19,7 @@ function loh($n) {
 }
 
 //Script Rest Api Url Shortener Database
-    if ($_GET['key'] === 'fw'){
+    if (@$_GET['key'] === 'fw'){
 	
         $a = loh(10);
         $longUrl = @$_POST['longUrl'];
