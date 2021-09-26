@@ -11,16 +11,14 @@ function add($conn){
     if ($_GET['key'] === 'fw'){
         $datestring = '%d %m %Y - %h:%i %a %s';
 	$time = time();
-	$date = mdate($datestring, $time);
-        $cc = time();
-        $a = substr(base64_encode($cc),0,5);
+        $a = substr(base64_encode($time),0,5);
      
         $longUrl = $_POST['longUrl'];
         $shortUrl = $site.'/'.$a;
         $view = 0;
         
         if(!empty($longUrl)){
-            $sql = "INSERT INTO url (longUrl, shortUrl, date, code, view) VALUES('".$longUrl."','".$shortUrl."','".$date."','".$a."','".$view."')";
+            $sql = "INSERT INTO url (longUrl, shortUrl, date, code, view) VALUES('".$longUrl."','".$shortUrl."','".mdate($datestring, $time)."','".$a."','".$view."')";
             $simpan = mysqli_query($conn, $sql);
             if($simpan){
                 $arr = array(
