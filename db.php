@@ -8,15 +8,12 @@ $conn = mysqli_connect($_SERVER['MYSQLHOST'].':'.$_SERVER['MYSQLPORT'],$_SERVER[
 //Script Rest Api Url Shortener Database
 function add($conn){
    
-    if ($_POST['key'] === 'fw'){
+    if ($_GET['key'] === 'fw'){
         $datestring = '%d %m %Y - %h:%i %a %s';
 	$time = time();
 	$date = mdate($datestring, $time);
         $cc = time();
-	
-	$alias = $_POST['alias'];
-        $l = (!empty($_POST['al'])) ? $_POST['al'] : "5";
-        $a = ($alias) ? $alias : substr(base64_encode($cc),0,$l);
+        $a = ($alias) ? $alias : substr(base64_encode($cc),0,5);
         $code = $a;
         $longUrl = $_POST['longUrl'];
         $shortUrl = $site.'/'.$a;
