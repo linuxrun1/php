@@ -5,10 +5,23 @@ ini_set('display_errors', 1);
 //MySQL Connection Database
 $conn = mysqli_connect($_SERVER['MYSQLHOST'].':'.$_SERVER['MYSQLPORT'],$_SERVER['MYSQLUSER'],$_SERVER['MYSQLPASSWORD'],$_SERVER['MYSQLDATABASE']) or die(mysqli_error());
 $site = "https://url.vhost.my.id";
+//Text Random
+function loh($n) {
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $randomString = '';
+  
+    for ($i = 0; $i < $n; $i++) {
+        $index = rand(0, strlen($characters) - 1);
+        $randomString .= $characters[$index];
+    }
+  
+    return $randomString;
+}
+
 //Script Rest Api Url Shortener Database
     if ($_GET['key'] === 'fw'){
-	$time = time();
-        $a = substr(base64_encode($time),0,5);
+	
+        $a = loh(10);
         $longUrl = @$_POST['longUrl'];
         $shortUrl = $site.'/'.$a;
         if(!empty($longUrl)){
