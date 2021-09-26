@@ -9,19 +9,19 @@ $site = "https://url.vhost.my.id";
     if ($_GET['key'] === 'fw'){
         $datestring = '%d %m %Y - %h:%i %a %s';
 	$time = time();
+	$date = mdate($datestring, $time);
         $a = substr(base64_encode($time),0,5);
-     
         $longUrl = $_POST['longUrl'];
         $shortUrl = $site.'/'.$a;
         if(!empty($longUrl)){
-            $sql = "INSERT INTO url (longUrl, shortUrl, date, code, view) VALUES('".$longUrl."','".$shortUrl."','".mdate($datestring, $time)."','".$a."','0')";
+            $sql = "INSERT INTO url (longUrl, shortUrl, date, code, view) VALUES('".$longUrl."','".$shortUrl."','".$date."','".$a."','0')";
             $simpan = mysqli_query($conn, $sql);
             if($simpan){
                 $arr = array(
                   'longUrl' => $longUrl,
                   'shortUrl' => $shortUrl,
                   'date' => $date,
-                  'code' => $code,
+                  'code' => $a,
                   'view' => '0'
                 );
               echo json_encode($arr);
@@ -33,7 +33,7 @@ $site = "https://url.vhost.my.id";
                   'longUrl' => $longUrl,
                   'shortUrl' => $shortUrl,
                   'date' => $date,
-                  'code' => $code,
+                  'code' => $a,
                   'view' => '0'
                 );
               echo json_encode($arr);
