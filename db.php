@@ -5,17 +5,19 @@ date_default_timezone_set("Asia/Jakarta");
 $conn = mysqli_connect($_SERVER['MYSQLHOST'].':'.$_SERVER['MYSQLPORT'],$_SERVER['MYSQLUSER'],$_SERVER['MYSQLPASSWORD'],$_SERVER['MYSQLDATABASE']) or die(mysqli_error());
 
 //Script Rest Api Url Shortener Database
-function add($conn, $longUrl, $alias){
+function add($conn){
    
     if ($_POST['key'] === 'fw'){
         $datestring = '%d %m %Y - %h:%i %a %s';
-		    $time = time();
-		    $date = mdate($datestring, $time);
+	$time = time();
+	$date = mdate($datestring, $time);
         $cc = time();
+	
+	$alias = $_POST['alias'];
         $l = (!empty($_POST['al'])) ? $_POST['al'] : "5";
         $a = ($alias) ? $alias : substr(base64_encode($cc),0,$l);
         $code = $a;
-        $longUrl = $longUrl;
+        $longUrl = $_POST['longUrl'];
         $shortUrl = $site.'/'.$a;
         $view = "0";
         
@@ -44,6 +46,8 @@ function add($conn, $longUrl, $alias){
                 );
               return json_encode($arr);
         }
+}else{
+echo json_encode(array("error auth key"));    
 }
-echo add($conn, $_POST['longUrl']);
+echo add($conn);
 ?>
