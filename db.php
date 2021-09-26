@@ -6,8 +6,6 @@ ini_set('display_errors', 1);
 $conn = mysqli_connect($_SERVER['MYSQLHOST'].':'.$_SERVER['MYSQLPORT'],$_SERVER['MYSQLUSER'],$_SERVER['MYSQLPASSWORD'],$_SERVER['MYSQLDATABASE']) or die(mysqli_error());
 $site = "https://url.vhost.my.id";
 //Script Rest Api Url Shortener Database
-function add($conn){
-   
     if ($_GET['key'] === 'fw'){
         $datestring = '%d %m %Y - %h:%i %a %s';
 	$time = time();
@@ -15,10 +13,8 @@ function add($conn){
      
         $longUrl = $_POST['longUrl'];
         $shortUrl = $site.'/'.$a;
-        $view = 0;
-        
         if(!empty($longUrl)){
-            $sql = "INSERT INTO url (longUrl, shortUrl, date, code, view) VALUES('".$longUrl."','".$shortUrl."','".mdate($datestring, $time)."','".$a."','".$view."')";
+            $sql = "INSERT INTO url (longUrl, shortUrl, date, code, view) VALUES('".$longUrl."','".$shortUrl."','".mdate($datestring, $time)."','".$a."','0')";
             $simpan = mysqli_query($conn, $sql);
             if($simpan){
                 $arr = array(
@@ -26,9 +22,9 @@ function add($conn){
                   'shortUrl' => $shortUrl,
                   'date' => $date,
                   'code' => $code,
-                  'view' => $view
+                  'view' => '0'
                 );
-              return json_encode($arr);
+              echo json_encode($arr);
             }
         } else {
             
@@ -38,12 +34,8 @@ function add($conn){
                   'shortUrl' => $shortUrl,
                   'date' => $date,
                   'code' => $code,
-                  'view' => $view
+                  'view' => '0'
                 );
-              return json_encode($arr);
+              echo json_encode($arr);
         }
-}else{
-echo json_encode(array("error auth key"));    
-}
-echo add($conn);
 ?>
