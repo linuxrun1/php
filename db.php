@@ -38,4 +38,7 @@ $site = "https://url.vhost.my.id";
                 );
               echo json_encode($arr);
         }
+}else{
+    echo "No auth key";
+    }
 ?>
