@@ -21,7 +21,7 @@ $site = "https://url.vhost.my.id";
                   'code' => $a,
                   'view' => '0'
                 );
-              echo json_encode($arr);
+              echo json_encode($arr, JSON_UNESCAPED_SLASHED);
             }
         } else {
             
@@ -32,7 +32,7 @@ $site = "https://url.vhost.my.id";
                   'code' => $a,
                   'view' => '0'
                 );
-              echo json_encode($arr);
+              echo json_encode($arr, JSON_UNESCAPED_SLASHED);
         }
 }else{
     echo "No auth key";
