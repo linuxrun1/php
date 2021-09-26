@@ -14,13 +14,12 @@ $site = "https://url.vhost.my.id";
         $longUrl = $_POST['longUrl'];
         $shortUrl = $site.'/'.$a;
         if(!empty($longUrl)){
-            $sql = "INSERT INTO url (longUrl, shortUrl, date, code, view) VALUES('".$longUrl."','".$shortUrl."','".$date."','".$a."','0')";
+            $sql = "INSERT INTO url (longUrl, shortUrl, code, view) VALUES('".$longUrl."','".$shortUrl."','".$a."','0')";
             $simpan = mysqli_query($conn, $sql);
             if($simpan){
                 $arr = array(
                   'longUrl' => $longUrl,
                   'shortUrl' => $shortUrl,
-                  'date' => $date,
                   'code' => $a,
                   'view' => '0'
                 );
@@ -32,7 +31,6 @@ $site = "https://url.vhost.my.id";
                   'error' => 'failed',
                   'longUrl' => $longUrl,
                   'shortUrl' => $shortUrl,
-                  'date' => $date,
                   'code' => $a,
                   'view' => '0'
                 );
